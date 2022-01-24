@@ -37,11 +37,19 @@ public class Order implements Serializable{
 	@Column(name="delivered")
 	private boolean delivered;
 	
+	@Column(name="driverName")
+	private String driverName;
+	
+	@Column(name="supplierName")
+	private String supplierName;
+	
+	/*
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Driver driver;
 	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Supplier supplier;
+	*/
 	
 	public Order() {
 		
@@ -85,6 +93,7 @@ public class Order implements Serializable{
 		this.destinationTo = destinationTo;
 	}
 
+	/*
 	public Driver getDriver() {
 		return driver;
 	}
@@ -100,9 +109,26 @@ public class Order implements Serializable{
 	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
 	}
-
+	*/
+	
 	public double getPrice() {
 		return price;
+	}
+
+	public String getDriverName() {
+		return driverName;
+	}
+
+	public void setDriverName(String driverName) {
+		this.driverName = driverName;
+	}
+
+	public String getSupplierName() {
+		return supplierName;
+	}
+
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
 	}
 
 	public void setPrice(double price) {
