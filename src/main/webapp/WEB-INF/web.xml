@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd">
 
 	<welcome-file-list>
-		<welcome-file>/views/index.xhtml</welcome-file>
+		<welcome-file>/views/template.xhtml</welcome-file>
 	</welcome-file-list>
 	<display-name>ADelivery</display-name>
 	<context-param>
