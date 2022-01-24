@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" style="height: 100%;">
+
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title></title>
+	<!-- Favicon icon -->
+	<link rel="icon" type="image/png" sizes="16x16"
+		href="assets/images/favicon.png" />
+	<!-- Custom Stylesheet -->
+	<h:outputStylesheet library="css" name="style.css" > </h:outputStylesheet>
+
+	
+
+
+</h:head>
+<h:body style="height: 100%!important;">
+	<!--*******************
+        Preloader start
+    ********************-->
+	<div id="preloader">
+		<div class="loader">
+			<svg class="circular" viewBox="25 25 50 50"> <circle
+				class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3"
+				stroke-miterlimit="10" /> </svg>
+		</div>
+	</div>
+	<!--*******************
+        Preloader end
+    ********************-->
+
+
+	<!--**********************************
+        Main wrapper start
+    ***********************************-->
+	<div id="main-wrapper" style="height: 100%;">
+
+		<!--**********************************
+            Nav header start
+        ***********************************-->
+		<div class="nav-header myHeader-title">
+			<div class="brand-logo">
+				<a href="newTemplate.xhtml"
+					style="color: white; font-size: initial;"> AliZone Delivery
+					Labs </a>
+			</div>
+		</div>
+		<!--**********************************
+            Nav header end
+        ***********************************-->
+
+		<!--**********************************
+            Header start
+        ***********************************-->
+		<div class="header">
+			<div class="header-content clearfix">
+
+				<div class="nav-control">
+					<div class="hamburger">
+						<span class="toggle-icon"><i class="icon-menu"></i></span>
+					</div>
+				</div>
+				<div class="header-left"></div>
+				<div class="header-right">
+					<a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a>
+				</div>
+			</div>
+		</div>
+		<!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+		<!--**********************************
+            Sidebar start
+        ***********************************-->
+		<div class="nk-sidebar">
+			<div class="nk-nav-scroll">
+				<ul class="metismenu" id="menu">
+					<li class="nav-label">Menu</li>
+					<li><a class="has-arrow" href="javascript:void()"
+						aria-expanded="false"> <i class="fa fa-suitcase"></i><span
+							class="nav-text">Services</span>
+					</a>
+						<ul aria-expanded="false">
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/services/tests-request.xhtml">Tests
+									Requests</a></li>
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/services/tests-results.xhtml">Test
+									Results</a></li>
+						</ul></li>
+					<li class="mega-menu mega-menu-sm"><a class="has-arrow"
+						href="javascript:void()" aria-expanded="false"> <i
+							class="fa fa-user"></i><span class="nav-text">Profiles</span>
+					</a>
+						<ul aria-expanded="false">
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/users/patient-card.xhtml">Patient</a></li>
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/users/doctor-card.xhtml">Doctor</a></li>
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/users/dataEntry-card.xhtml">Data
+									Entry</a></li>
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/users/resultEntry-card.xhtml">Result
+									Entry</a></li>
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/users/admin-card.xhtml">Admin</a></li>
+						</ul></li>
+
+					<li><a class="has-arrow" href="javascript:void()"
+						aria-expanded="false"> <i class="fa fa-heartbeat"></i> <span
+							class="nav-text">Tests</span>
+					</a>
+						<ul aria-expanded="false">
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/healthtest/healthTestType-card.xhtml">Test
+									Card</a></li>
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/healthtest/healthTestType-list.xhtml">Health
+									Tests</a></li>
+						</ul></li>
+
+					<li><a class="has-arrow" href="javascript:void()"
+						aria-expanded="false"> <i class="fa fa-folder"></i> <span
+							class="nav-text">Reports</span>
+					</a>
+						<ul aria-expanded="false">
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/reports/general-report.xhtml">General
+									Report</a></li>
+						</ul></li>
+
+					<li><a class="has-arrow" href="javascript:void()"
+						aria-expanded="false"> <i class="fa fa-list-ol"></i> <span
+							class="nav-text">Lists</span>
+					</a>
+						<ul aria-expanded="false">
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/users/admin-list.xhtml">Admins</a></li>
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/users/patient-list.xhtml">Patients</a></li>
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/users/dataEntry-list.xhtml">DataEntries</a></li>
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/users/doctor-list.xhtml">Doctors</a></li>
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/users/resultEntry-list.xhtml">ResultEntries</a></li>
+
+							<li><a
+								href="http://localhost:8080/Lab/faces/views/insuranceCompany/insuranceCompanyList.xhtml">Insurance
+									Companies</a></li>
+						</ul></li>
+
+					<li><a class="has-arrow" href="javascript:void()"
+						aria-expanded="false"> <i class="icon-graph menu-icon"></i> <span
+							class="nav-text">Charts</span>
+					</a>
+						<ul aria-expanded="false">
+							<li><a href="./chart-flot.html">Patients</a></li>
+							<li><a href="./chart-morris.html">Tests</a></li>
+							<li><a href="./chart-chartjs.html">Insurance Company</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+		<!--**********************************
+            Sidebar end
+        ***********************************-->
+
+		<!--**********************************
+            Content body start
+        ***********************************-->
+		<div class="content-body">
+
+
+			<h:form prependId="false">
+				<ui:insert name="main-content">
+
+				</ui:insert>
+			</h:form>
+
+			<div class="container-fluid"></div>
+			<!-- #/ container -->
+		</div>
+		<!--**********************************
+            Content body end
+        ***********************************-->
+
+
+		<!--**********************************
+            Footer start
+        ***********************************-->
+		<div class="footer"></div>
+		<!--**********************************
+            Footer end
+        ***********************************-->
+	</div>
+
+	<!--**********************************
+        Scripts
+    ***********************************-->
+	<h:outputScript name="plugins/common/common.min.js" />
+
+
+	<f:facet name="first">
+		<h:outputScript name="jquery/jquery.js" library="primefaces" />
+	</f:facet>
+
+	<h:outputScript name="js/custom.min.js" />
+	<h:outputScript name="js/settings.js" />
+	<h:outputScript name="js/gleek.js" />
+	<h:outputScript name="js/styleSwitcher.js" />
+	<h:outputScript name="js/jquery-3.5.1.js" />
+	
+	
+	<h:outputScript name="template.js" library="js" />
+	
+<!-- 	<h:outputScript name="bootstrap-datepicker.min.js" -->
+<!-- 		library="assets/plugins/bootstrap-datepicker" /> -->
+		
+<!-- 	<h:outputStylesheet name="bootstrap-datepicker.min.js" -->
+<!-- 		library="assets/plugins/bootstrap-datepicker/dist/js" /> -->
+
+</h:body>
+</html>
