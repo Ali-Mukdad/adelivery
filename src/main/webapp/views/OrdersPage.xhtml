@@ -2,32 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/views/template.xhtml">
 	<ui:define name="main-content">
 		<div class="container-fluid mt-3">
 			<div class="row">
 				<div class="col-lg-3 col-sm-6">
-					<div class="card gradient-1">
-						<div class="card-body">
-							<h3 class="card-title text-white">Products Sold</h3>
-							<div class="d-inline-block">
-								<h2 class="text-white">4565</h2>
-								<p class="text-white mb-0">Jan - March 2019</p>
-							</div>
-							<span class="float-right display-5 opacity-5"><i
-								class="fa fa-shopping-cart"></i></span>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
 					<div class="card gradient-2">
 						<div class="card-body">
-							<h3 class="card-title text-white">Net Profit</h3>
+							<h3 class="card-title text-white">Total Prices</h3>
 							<div class="d-inline-block">
 								<h2 class="text-white">$ 8541</h2>
-								<p class="text-white mb-0">Jan - March 2019</p>
 							</div>
 							<span class="float-right display-5 opacity-5"><i
 								class="fa fa-money"></i></span>
@@ -35,32 +22,162 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
-					<div class="card gradient-3">
+					<div class="card gradient-1">
 						<div class="card-body">
-							<h3 class="card-title text-white">New Customers</h3>
+							<h3 class="card-title text-white">Total Numbers of Orders</h3>
 							<div class="d-inline-block">
 								<h2 class="text-white">4565</h2>
-								<p class="text-white mb-0">Jan - March 2019</p>
 							</div>
 							<span class="float-right display-5 opacity-5"><i
-								class="fa fa-users"></i></span>
+								class="fa fa-globe"></i></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-sm-6">
+					<div class="card gradient-3">
+						<div class="card-body">
+							<h3 class="card-title text-white">Number Of Orders Today</h3>
+							<div class="d-inline-block">
+								<h2 class="text-white">4565</h2>
+							</div>
+							<span class="float-right display-5 opacity-5"><i
+								class="fa fa-truck"></i></span>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
 					<div class="card gradient-4">
 						<div class="card-body">
-							<h3 class="card-title text-white">Customer Satisfaction</h3>
+							<h3 class="card-title text-white">Number Of Orders Done</h3>
 							<div class="d-inline-block">
-								<h2 class="text-white">99%</h2>
-								<p class="text-white mb-0">Jan - March 2019</p>
+								<h2 class="text-white">999</h2>
 							</div>
 							<span class="float-right display-5 opacity-5"><i
-								class="fa fa-heart"></i></span>
+								class="fa fa-check-square"></i></span>
 						</div>
 					</div>
 				</div>
 			</div>
+
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="card-body">
+
+							<div class="row">
+								<div class="col-lg-12">
+									<h:commandLink action="#" value="add Order"
+										styleClass="btn mb-1 btn-primary"
+										style="position: relative;float: right;" />
+								</div>
+							</div>
+
+							<div class="row">
+								<p:dataTable var="order" value="#{indexController.orders}"
+									allowSorting="true" sortMode="multiple" draggableColumns="true"
+									resizableColumns="true" editable="true">
+
+									<!-- <p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}"
+										update=":form:msgs" />
+									<p:ajax event="rowEditCancel"
+										listener="#{dtEditView.onRowCancel}" update=":form:msgs" /> -->
+
+									<p:column headerText="Order Id">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{order.id}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="orderId" value="#{order.id}"
+													style="width:100%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="Supplier">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{order.supplierName}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="supplierName" value="#{order.supplierName}"
+													style="width:100%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="Driver">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{order.driverName}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="driverName" value="#{order.driverName}"
+													style="width:100%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="Detination From">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{order.destinationFrom}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="destinationFrom"
+													value="#{order.destinationFrom}" style="width:100%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="Destination To">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{order.destinationTo}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="destinationTo"
+													value="#{order.destinationTo}" style="width:100%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="Price">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{order.price}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="price" value="#{order.price}"
+													style="width:100%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="Status">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:selectOneMenu value="#{order.delivered}"></h:selectOneMenu>
+											</f:facet>
+											<f:facet name="input">
+												<p:selectBooleanButton onIcon="pi pi-check"
+													offIcon="pi pi-times" style="width:100%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column style="width:6rem">
+										<p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit"
+											saveTitle="Save Row" />
+									</p:column>
+
+								</p:dataTable>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</ui:define>
 

@@ -15,7 +15,7 @@ import org.omnifaces.cdi.ViewScoped;
 
 @Named
 @ViewScoped
-public class indexController implements Serializable{
+public class OrdersController implements Serializable{
 
 	/**
 	 * 
@@ -29,7 +29,7 @@ public class indexController implements Serializable{
 	
 	@PostConstruct
 	public void init() {
-		
+		orders = orderFacade.findAll();
 	}
 
 	public OrderFacade getOrderFacade() {
