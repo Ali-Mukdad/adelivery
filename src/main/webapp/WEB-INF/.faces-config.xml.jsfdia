@@ -2,11 +2,11 @@
 <PROCESS model-entity="JSFProcess">
  <PROCESS-ITEM NAME="rules:" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules::0" NAME="item" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="home::#views#template.xhtml" NAME="output"
-    PATH="/views/template.xhtml" TARGET="rules:#views#template.xhtml"
-    TITLE="home" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="home::#views#OrdersPage.xhtml" NAME="output"
+    PATH="/views/OrdersPage.xhtml"
+    TARGET="rules:#views#OrdersPage.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#views#template.xhtml"
-  PATH="/views/template.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#OrdersPage.xhtml"
+  PATH="/views/OrdersPage.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

@@ -23,7 +23,7 @@ public abstract class AbstractFacade<T> implements Serializable, ICRUDOperations
 
 	private static final long serialVersionUID = -1L;
 	protected Class<T> entityClass;
-	@PersistenceContext(unitName = "delivery")
+	@PersistenceContext(unitName = "ADelivery-persistence-unit")
 	private EntityManager em;
 
 	public AbstractFacade(Class<T> entityClass) {
@@ -72,6 +72,7 @@ public abstract class AbstractFacade<T> implements Serializable, ICRUDOperations
 		return (getEntityManager().createQuery(cq).getSingleResult()).intValue();
 	}
 
+	@SuppressWarnings("deprecation")
 	public T newEntity() throws InstantiationException, IllegalAccessException {
 		return this.entityClass.newInstance();
 	}
