@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -16,10 +17,8 @@ import org.eclipse.persistence.queries.DatabaseQuery;
 import org.eclipse.persistence.sessions.DatabaseRecord;
 import org.eclipse.persistence.sessions.Session;
 
-import interfaces.ICRUDOperations;
-
 @Stateless
-public abstract class AbstractFacade<T> implements Serializable, ICRUDOperations<T> {
+public abstract class AbstractFacade<T> implements Serializable{
 
 	private static final long serialVersionUID = -1L;
 	protected Class<T> entityClass;
@@ -52,9 +51,12 @@ public abstract class AbstractFacade<T> implements Serializable, ICRUDOperations
 		return getEntityManager().find(entityClass, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
-		CriteriaQuery<T> cq = getEntityManager().getCriteriaBuilder().createQuery(entityClass);
-		cq.select(cq.from(entityClass));
+		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<T> cq = (CriteriaQuery<T>) cb.createQuery();
+		Root<T> r = cq.from(entityClass);
+		cq.select(r);
 		return getEntityManager().createQuery(cq).getResultList();
 	}
 

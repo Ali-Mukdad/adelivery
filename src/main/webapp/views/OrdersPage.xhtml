@@ -73,7 +73,7 @@
 							</div>
 
 							<div class="row">
-								<p:dataTable var="order" value="#{indexController.orders}"
+								<p:dataTable var="order" value="#{ordersController.orders}"
 									allowSorting="true" sortMode="multiple" draggableColumns="true"
 									resizableColumns="true" editable="true">
 
@@ -157,11 +157,15 @@
 									<p:column headerText="Status">
 										<p:cellEditor>
 											<f:facet name="output">
-												<h:selectOneMenu value="#{order.delivered}"></h:selectOneMenu>
+												<h:panelGroup rendered="#{order.delivered == false}">
+													<i class="fa fa-xmark">aaaaaa</i>
+												</h:panelGroup>
+												<h:panelGroup rendered="#{order.delivered == true}">
+													<i class="fa fa-check">fffffff</i>
+												</h:panelGroup>
 											</f:facet>
 											<f:facet name="input">
-												<p:selectBooleanButton onIcon="pi pi-check"
-													offIcon="pi pi-times" style="width:100%" />
+												<p:selectBooleanCheckbox value="#{order.delivered}"/>
 											</f:facet>
 										</p:cellEditor>
 									</p:column>
