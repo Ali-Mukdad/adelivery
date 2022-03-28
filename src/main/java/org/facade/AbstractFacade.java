@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 import org.eclipse.persistence.internal.jpa.EJBQueryImpl;
 import org.eclipse.persistence.jpa.JpaEntityManager;
@@ -33,10 +34,19 @@ public abstract class AbstractFacade<T> implements Serializable{
 		return em;
 	}
 
+	@Transactional
 	public T save(T entity) throws Exception {
 		return getEntityManager().merge(entity);
 	}
+	
+	public T persist(T entity) {
+		if (entity != null) {
+			getEntityManager().persist(entity);
+		}
+		return entity;
+	}
 
+	@Transactional
 	public void remove(T entity) throws Exception {
 		getEntityManager().remove(getEntityManager().merge(entity));
 	}

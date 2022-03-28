@@ -14,10 +14,9 @@
 		href="assets/images/favicon.png" /> -->
 	<!-- Custom Stylesheet -->
 	<h:outputStylesheet library="css" name="style.css"/>
-	<h:outputStylesheet library="font-awesome/css" name="font-awesome.min.css"/>
-
-
-
+	<h:outputStylesheet library="css" name="delivery.css"/>
+	<h:outputStylesheet library="font-awesome" name="css/font-awesome.min.css"/>
+	<h:outputStylesheet library="plugins" name="bootstrap-datepicker/bootstrap-datepicker.min.css"/>
 
 </h:head>
 <h:body style="height: 100%!important;">
@@ -131,7 +130,9 @@
 	<f:facet name="first">
 		<h:outputScript name="jquery/jquery.js" library="primefaces" />
 	</f:facet>
-
+	
+	<h:outputScript name="plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"  />
+	<h:outputScript name="js/delivery.js"  />
 	<h:outputScript name="js/custom.min.js" />
 	<h:outputScript name="js/settings.js" />
 	<h:outputScript name="js/gleek.js" />

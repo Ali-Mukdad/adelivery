@@ -1,24 +1,24 @@
 package org.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-public class Orders implements Serializable{
+public class Orders implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
-
-	@Column(name = "orderid")
-	private String orderId;
 
 	@Column(name = "ordercode")
 	private String orderCode;
@@ -28,6 +28,14 @@ public class Orders implements Serializable{
 
 	@Column(name = "destinationto")
 	private String destinationTo;
+
+	@Column(name = "datefrom")
+	@Temporal(TemporalType.DATE)
+	private Date dateFrom;
+
+	@Column(name = "dateto")
+	@Temporal(TemporalType.DATE)
+	private Date dateTo;
 
 	@Column(name = "price")
 	private double price;
@@ -45,14 +53,15 @@ public class Orders implements Serializable{
 		super();
 	}
 
-	public Orders(long id, String orderId, String orderCode, String destinationFrom, String destinationTo, double price,
-			boolean delivered, String driverName, String supplierName) {
+	public Orders(long id, String orderCode, String destinationFrom, String destinationTo, Date dateFrom, Date dateTo,
+			double price, boolean delivered, String driverName, String supplierName) {
 		super();
 		this.id = id;
-		this.orderId = orderId;
 		this.orderCode = orderCode;
 		this.destinationFrom = destinationFrom;
 		this.destinationTo = destinationTo;
+		this.dateFrom = dateFrom;
+		this.dateTo = dateTo;
 		this.price = price;
 		this.delivered = delivered;
 		this.driverName = driverName;
@@ -65,14 +74,6 @@ public class Orders implements Serializable{
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public String getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
 	}
 
 	public String getOrderCode() {
@@ -130,4 +131,21 @@ public class Orders implements Serializable{
 	public void setSupplierName(String supplierName) {
 		this.supplierName = supplierName;
 	}
+
+	public Date getDateFrom() {
+		return dateFrom;
+	}
+
+	public void setDateFrom(Date dateFrom) {
+		this.dateFrom = dateFrom;
+	}
+
+	public Date getDateTo() {
+		return dateTo;
+	}
+
+	public void setDateTo(Date dateTo) {
+		this.dateTo = dateTo;
+	}
+
 }

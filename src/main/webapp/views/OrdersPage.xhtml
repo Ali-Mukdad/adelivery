@@ -3,61 +3,67 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <ui:composition template="/views/template.xhtml">
 	<ui:define name="main-content">
+		<p:growl id="msgs" showDetail="true" />
 		<div class="container-fluid mt-3">
+
 			<div class="row">
-				<div class="col-lg-3 col-sm-6">
-					<div class="card gradient-2">
-						<div class="card-body">
-							<h3 class="card-title text-white">Total Prices</h3>
-							<div class="d-inline-block">
-								<h2 class="text-white">#{ordersController.totalPrices}</h2>
+				<h:panelGroup id="stat-tabs" style="width:100%;display:flex;">
+					<div class="col-lg-3 col-sm-6">
+						<div class="card gradient-2">
+							<div class="card-body">
+								<h3 class="card-title text-white">Total Prices</h3>
+								<div class="d-inline-block">
+									<h2 class="text-white">#{ordersController.totalPrices}</h2>
+								</div>
+								<span class="float-right display-5 opacity-5"><i
+									class="fa fa-money"></i></span>
 							</div>
-							<span class="float-right display-5 opacity-5"><i
-								class="fa fa-money"></i></span>
 						</div>
 					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="card gradient-1">
-						<div class="card-body">
-							<h3 class="card-title text-white">Total Numbers of Orders</h3>
-							<div class="d-inline-block">
-								<h2 class="text-white">#{ordersController.totalNbOfOrders}</h2>
+					<div class="col-lg-3 col-sm-6">
+						<div class="card gradient-1">
+							<div class="card-body">
+								<h3 class="card-title text-white">Total Numbers of Orders</h3>
+								<div class="d-inline-block">
+									<h2 class="text-white">#{ordersController.totalNbOfOrders}</h2>
+								</div>
+								<span class="float-right display-5 opacity-5"><i
+									class="fa fa-globe"></i></span>
 							</div>
-							<span class="float-right display-5 opacity-5"><i
-								class="fa fa-globe"></i></span>
 						</div>
 					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="card gradient-3">
-						<div class="card-body">
-							<h3 class="card-title text-white">Number Of Orders Today</h3>
-							<div class="d-inline-block">
-								<h2 class="text-white">4565</h2>
+					<div class="col-lg-3 col-sm-6">
+						<div class="card gradient-3">
+							<div class="card-body">
+								<h3 class="card-title text-white">Number Of Orders Today</h3>
+								<div class="d-inline-block">
+									<h2 class="text-white">#{ordersController.nbOfOrdersToday}</h2>
+								</div>
+								<span class="float-right display-5 opacity-5"><i
+									class="fa fa-truck"></i></span>
 							</div>
-							<span class="float-right display-5 opacity-5"><i
-								class="fa fa-truck"></i></span>
 						</div>
 					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="card gradient-4">
-						<div class="card-body">
-							<h3 class="card-title text-white">Number Of Orders Done</h3>
-							<div class="d-inline-block">
-								<h2 class="text-white">999</h2>
+					<div class="col-lg-3 col-sm-6">
+						<div class="card gradient-4">
+							<div class="card-body">
+								<h3 class="card-title text-white">Number Of Orders Done</h3>
+								<div class="d-inline-block">
+									<h2 class="text-white">#{ordersController.nbOfOrdersDone}</h2>
+								</div>
+								<span class="float-right display-5 opacity-5"><i
+									class="fa fa-check-square"></i></span>
 							</div>
-							<span class="float-right display-5 opacity-5"><i
-								class="fa fa-check-square"></i></span>
 						</div>
 					</div>
-				</div>
+				</h:panelGroup>
 			</div>
+
 
 			<div class="row">
 				<div class="col-lg-12">
@@ -66,23 +72,148 @@
 
 							<div class="row">
 								<div class="col-lg-12">
-									<h:commandLink action="#" value="add Order"
-										styleClass="btn mb-1 btn-primary"
-										style="position: relative;float: right;" />
+
+
+									<button type="button" class="btn btn-primary"
+										data-toggle="modal" data-target="#orderModal"
+										style="position: relative; float: right; right: -14px; top: -20px;">add
+										Order</button>
+									<div class="modal fade" id="orderModal" style="display: none;"
+										aria-hidden="true">
+										<div class="modal-dialog modal-lg" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title">New Order</h5>
+													<button type="button" class="close" data-dismiss="modal">
+														<span>×</span>
+													</button>
+												</div>
+												<div class="modal-body">
+
+													<div class="row">
+														<div class="col-md-4">
+															<h:inputText id="orderCode"
+																styleClass="form-control input-default modal-input"
+																required="true"
+																value="#{ordersController.order.orderCode}"
+																a:placeholder="Order Code">
+																<f:ajax execute="orderCode" render="orderCode"></f:ajax>
+															</h:inputText>
+														</div>
+														<div class="col-md-4">
+															<h:inputText
+																styleClass="form-control input-default modal-input"
+																required="true"
+																value="#{ordersController.order.supplierName}"
+																a:placeholder="Supplier Name">
+																<f:ajax></f:ajax>
+															</h:inputText>
+														</div>
+														<div class="col-md-4">
+															<h:inputText
+																styleClass="form-control input-default modal-input"
+																required="true"
+																value="#{ordersController.order.driverName}"
+																a:placeholder="Drive Name">
+																<f:ajax></f:ajax>
+															</h:inputText>
+														</div>
+													</div>
+
+													<div class="row">
+														<div class="col-md-4">
+															<h:inputText
+																styleClass="form-control input-default modal-input"
+																required="true"
+																value="#{ordersController.order.destinationFrom}"
+																a:placeholder="Starting Point">
+																<f:ajax></f:ajax>
+															</h:inputText>
+														</div>
+														<div class="col-md-4">
+															<h:inputText
+																styleClass="form-control input-default modal-input"
+																required="true"
+																value="#{ordersController.order.destinationTo}"
+																a:placeholder="Destination">
+																<f:ajax></f:ajax>
+															</h:inputText>
+														</div>
+														<div class="col-md-4">
+															<h:inputText
+																styleClass="form-control input-default modal-input"
+																required="true" value="#{ordersController.order.price}"
+																a:placeholder="Price">
+																<f:ajax></f:ajax>
+															</h:inputText>
+														</div>
+													</div>
+
+													<div class="row">
+														<div class="col-md-4">
+															<h:inputText
+																styleClass="form-control input-default modal-input datepicker"
+																required="true"
+																value="#{ordersController.order.dateFrom}"
+																a:placeholder="Lunching Date">
+																<f:convertDateTime pattern="dd-mm-yyyy" />
+																<f:ajax></f:ajax>
+															</h:inputText>
+														</div>
+														<div class="col-md-4">
+															<h:inputText
+																styleClass="form-control input-default modal-input datepicker"
+																required="true" value="#{ordersController.order.dateTo}"
+																a:placeholder="Delivered Date">
+																<f:convertDateTime pattern="dd-mm-yyyy" />
+																<f:ajax></f:ajax>
+															</h:inputText>
+														</div>
+													</div>
+
+													<div class="row">
+														<div class="col-md-4">
+															<h:outputText styleClass="modal-input"
+																value="Delivered: " />
+															<h:selectBooleanCheckbox styleClass="modal-input"
+																required="true"
+																value="#{ordersController.order.delivered}">
+																<f:ajax></f:ajax>
+															</h:selectBooleanCheckbox>
+														</div>
+													</div>
+
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary btn-danger"
+														data-dismiss="modal">Cancel</button>
+													<h:commandLink
+														actionListener="#{ordersController.addOrder()}"
+														class="btn btn-primary btn-success" value="Save">
+														<f:ajax render=" orderModal ordersTable stat-tabs msgs" />
+													</h:commandLink>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 
 							<div class="row">
-								<p:dataTable var="order" value="#{ordersController.orders}"
-									allowSorting="true" sortMode="multiple" draggableColumns="true"
-									resizableColumns="true" editable="true">
+								<p:dataTable id="ordersTable" var="order"
+									value="#{ordersController.orders}" allowSorting="true"
+									sortMode="multiple" draggableColumns="true"
+									resizableColumns="true" editable="true" rows="10"
+									paginator="true" paginatorPosition="bottom"
+									rowsPerPageTemplate="10,50,100,{ShowAll|'All'}">
 
-									<!-- <p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}"
-										update=":form:msgs" />
-									<p:ajax event="rowEditCancel"
+									<p:ajax event="rowEdit"
+										listener="#{ordersController.updateOrder(order)}"
+										update="msgs stat-tabs" />
+									<!-- <p:ajax event="rowEditCancel"
 										listener="#{dtEditView.onRowCancel}" update=":form:msgs" /> -->
 
-									<p:column headerText="Order Id">
+									<!-- <p:column headerText="Order Id">
 										<p:cellEditor>
 											<f:facet name="output">
 												<h:outputText value="#{order.id}" />
@@ -92,9 +223,21 @@
 													style="width:100%" />
 											</f:facet>
 										</p:cellEditor>
+									</p:column> -->
+
+									<p:column headerText="Order Code" width="2em">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{order.orderCode}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="orderCode" value="#{order.orderCode}"
+													style="width:100%" />
+											</f:facet>
+										</p:cellEditor>
 									</p:column>
 
-									<p:column headerText="Supplier">
+									<p:column headerText="Supplier" width="1em">
 										<p:cellEditor>
 											<f:facet name="output">
 												<h:outputText value="#{order.supplierName}" />
@@ -106,7 +249,7 @@
 										</p:cellEditor>
 									</p:column>
 
-									<p:column headerText="Driver">
+									<p:column headerText="Driver" width="1em">
 										<p:cellEditor>
 											<f:facet name="output">
 												<h:outputText value="#{order.driverName}" />
@@ -118,7 +261,7 @@
 										</p:cellEditor>
 									</p:column>
 
-									<p:column headerText="Detination From">
+									<p:column headerText="Destination From" width="3em">
 										<p:cellEditor>
 											<f:facet name="output">
 												<h:outputText value="#{order.destinationFrom}" />
@@ -130,7 +273,7 @@
 										</p:cellEditor>
 									</p:column>
 
-									<p:column headerText="Destination To">
+									<p:column headerText="Destination To" width="3em">
 										<p:cellEditor>
 											<f:facet name="output">
 												<h:outputText value="#{order.destinationTo}" />
@@ -142,7 +285,41 @@
 										</p:cellEditor>
 									</p:column>
 
-									<p:column headerText="Price">
+									<p:column headerText="Date From" width="2em">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{order.dateFrom}">
+													<f:convertDateTime pattern="dd-MM-yyyy" />
+												</h:outputText>
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="dateFrom" value="#{order.dateFrom}"
+													style="width:100%" onfocus="reinit()"
+													styleClass="datepicker date-from">
+													<f:convertDateTime pattern="dd-MM-yyyy" />
+												</p:inputText>
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="Date To" width="2em">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{order.dateTo}">
+													<f:convertDateTime pattern="dd-MM-yyyy" />
+												</h:outputText>
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="dateTo" value="#{order.dateTo}"
+													onfocus="reinit()" style="width:100%"
+													styleClass="date-to datepicker">
+													<f:convertDateTime pattern="dd-MM-yyyy" />
+												</p:inputText>
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="Price" width="1em">
 										<p:cellEditor>
 											<f:facet name="output">
 												<h:outputText value="#{order.price}" />
@@ -154,26 +331,35 @@
 										</p:cellEditor>
 									</p:column>
 
-									<p:column headerText="Status">
+									<p:column headerText="Status" width="1em">
 										<p:cellEditor>
 											<f:facet name="output">
 												<h:panelGroup rendered="#{order.delivered == false}">
-													<i class="fa fa-xmark">aaaaaa</i>
+													<i class="fa fa-close red"></i>
 												</h:panelGroup>
 												<h:panelGroup rendered="#{order.delivered == true}">
-													<i class="fa fa-check">fffffff</i>
+													<i class="fa fa-check green"></i>
 												</h:panelGroup>
 											</f:facet>
 											<f:facet name="input">
-												<p:selectBooleanCheckbox value="#{order.delivered}"/>
+												<p:selectBooleanCheckbox value="#{order.delivered}" />
 											</f:facet>
 										</p:cellEditor>
 									</p:column>
 
-									<p:column style="width:6rem">
+									<p:column width="1em">
 										<p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit"
 											saveTitle="Save Row" />
 									</p:column>
+
+									<p:column width="1em">
+										<h:commandLink
+											actionListener="#{ordersController.deleteOrder()}"
+											styleClass="fa fa-trash remove">
+											<f:param name="toDelete" value="#{order.id}" />
+										</h:commandLink>
+									</p:column>
+
 
 								</p:dataTable>
 							</div>

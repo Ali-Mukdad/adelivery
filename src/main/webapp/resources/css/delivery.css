@@ -1,0 +1,21 @@
+@charset "ISO-8859-1";
+
+.modal-input{
+	margin-top: 10px;
+}
+
+.remove:hover{
+	color: #f00;
+}
+
+.remove{
+	cursor: pointer;
+}
+
+.green{
+	color: green;
+}
+
+.red{
+	color: #f00;
+}
