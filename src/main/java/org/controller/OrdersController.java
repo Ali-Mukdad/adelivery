@@ -96,10 +96,10 @@ public class OrdersController implements Serializable {
 		try {
 			Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 			String id = params.get("toDelete");
-			orderFacade.remove(orderFacade.find(id));
+			orderFacade.remove(orderFacade.find(Long.parseLong(id)));
 		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Deleting error", "warn"));
 			e.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Deleting error", "error"));
 		}
 	}
 

@@ -190,7 +190,7 @@
 													<h:commandLink
 														actionListener="#{ordersController.addOrder()}"
 														class="btn btn-primary btn-success" value="Save">
-														<f:ajax render=" orderModal ordersTable stat-tabs msgs" />
+														<p:ajax update="#{p.component('ordersList')} stat-tabs msgs"/>
 													</h:commandLink>
 												</div>
 											</div>
@@ -200,11 +200,11 @@
 							</div>
 
 							<div class="row">
-								<p:dataTable id="ordersTable" var="order"
-									value="#{ordersController.orders}" allowSorting="true"
+								<p:dataTable id="ordersList" var="order"
+									value="#{ordersController.orders}" allowUnsorting="true"
 									sortMode="multiple" draggableColumns="true"
 									resizableColumns="true" editable="true" rows="10"
-									paginator="true" paginatorPosition="bottom"
+									paginator="true" paginatorPosition="bottom" widgetVar="widget"
 									rowsPerPageTemplate="10,50,100,{ShowAll|'All'}">
 
 									<p:ajax event="rowEdit"
@@ -285,7 +285,7 @@
 										</p:cellEditor>
 									</p:column>
 
-									<p:column headerText="Date From" width="2em">
+									<p:column headerText="Date From" width="2em" sortBy="#{order.dateFrom}">
 										<p:cellEditor>
 											<f:facet name="output">
 												<h:outputText value="#{order.dateFrom}">
@@ -302,7 +302,7 @@
 										</p:cellEditor>
 									</p:column>
 
-									<p:column headerText="Date To" width="2em">
+									<p:column headerText="Date To" width="2em" sortBy="#{order.dateTo}">
 										<p:cellEditor>
 											<f:facet name="output">
 												<h:outputText value="#{order.dateTo}">
@@ -331,7 +331,7 @@
 										</p:cellEditor>
 									</p:column>
 
-									<p:column headerText="Status" width="1em">
+									<p:column headerText="Status" width="1em" sortBy="#{order.delivered}">
 										<p:cellEditor>
 											<f:facet name="output">
 												<h:panelGroup rendered="#{order.delivered == false}">
@@ -353,14 +353,13 @@
 									</p:column>
 
 									<p:column width="1em">
-										<h:commandLink
+										<h:commandLink action="deleteOrder"
 											actionListener="#{ordersController.deleteOrder()}"
 											styleClass="fa fa-trash remove">
 											<f:param name="toDelete" value="#{order.id}" />
+											<f:ajax render="msgs ordersList" />
 										</h:commandLink>
 									</p:column>
-
-
 								</p:dataTable>
 							</div>
 						</div>
