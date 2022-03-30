@@ -19,3 +19,7 @@
 .red{
 	color: #f00;
 }
+
+.metismenu .collapse.in {
+  display: block;
+}
