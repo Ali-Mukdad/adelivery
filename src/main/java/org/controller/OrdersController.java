@@ -5,8 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -41,10 +39,68 @@ public class OrdersController implements Serializable {
 		order = new Orders();
 		orders = orderFacade.findAll();
 		totalNbOfOrders = orders.size() > 0 ? orders.size() : 0;
-		Date today = new Date();
-		SimpleDateFormat d1 = new SimpleDateFormat("dd/MM/yyyy");
-		String stringDate = d1.format(today);
+		updateStats();
+	}
+
+	public boolean validateOrder(Orders order) {
+
+		if (order.getOrderCode() == null || order.getOrderCode().isEmpty()) {
+			return false;
+		} else if (order.getDateFrom() == null || order.getDateFrom().toString().isEmpty()) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public void addOrder() {
+		try {
+			if (!validateOrder(order)) {
+				return;
+			}
+			orderFacade.save(order);
+			orders = orderFacade.findAll();
+			order = new Orders();
+			totalNbOfOrders = orders.size();
+			updateStats();
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Added the order Succefully", "success"));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error in adding order", "error"));
+		}
+	}
+
+	public void updateOrder(Orders updatedOrder) {
+		try {
+			orderFacade.save(updatedOrder);
+			updateStats();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Updated order Succefully", "success"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void deleteOrder(Orders order) {
+		try {
+			orderFacade.remove(order);
+			orders = orderFacade.findAll();
+			totalNbOfOrders = orders.size();
+			updateStats();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Deleting confirmed", "success"));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Deleting error", "warn"));
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateStats() {
+		totalPrices = 0;
+		nbOfOrdersToday = 0;
+		nbOfOrdersDone = 0;
 		orders.stream().forEach(order -> {
+			Date today = new Date();
+			SimpleDateFormat d1 = new SimpleDateFormat("dd/MM/yyyy");
+			String stringDate = d1.format(today);
 			totalPrices += order.getPrice();
 			SimpleDateFormat d2 = new SimpleDateFormat("dd/MM/yyyy");
 			String orderDate = d2.format(order.getDateFrom());
@@ -56,51 +112,6 @@ public class OrdersController implements Serializable {
 				nbOfOrdersDone += 1;
 			}
 		});
-	}
-	
-	public boolean validateOrder(Orders order) {
-		
-		if(order.getOrderCode() == null || order.getOrderCode().isEmpty()) {
-			return false;
-		}else if(order.getDateFrom() == null || order.getDateFrom().toString().isEmpty()) {
-			return false;
-		}
-		
-		return true;
-	}
-
-	public void addOrder() {
-		try {
-			if(!validateOrder(order)) {
-				return;
-			}
-			orderFacade.save(order);
-			order = new Orders();
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("Added the order Succefully", "success"));
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error in adding order", "error"));
-		}
-	}
-
-	public void updateOrder(Orders updatedOrder) {
-		try {
-			orderFacade.save(updatedOrder);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Updated order Succefully", "success"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void deleteOrder() {
-		try {
-			Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-			String id = params.get("toDelete");
-			orderFacade.remove(orderFacade.find(Long.parseLong(id)));
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Deleting error", "warn"));
-			e.printStackTrace();
-		}
 	}
 
 	public OrderFacade getOrderFacade() {

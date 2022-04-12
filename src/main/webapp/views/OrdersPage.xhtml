@@ -73,11 +73,11 @@
 							<div class="row">
 								<div class="col-lg-12">
 
-
 									<button type="button" class="btn btn-primary"
 										data-toggle="modal" data-target="#orderModal"
 										style="position: relative; float: right; right: -14px; top: -20px;">add
 										Order</button>
+
 									<div class="modal fade" id="orderModal" style="display: none;"
 										aria-hidden="true">
 										<div class="modal-dialog modal-lg" role="document">
@@ -101,7 +101,7 @@
 															</h:inputText>
 														</div>
 														<div class="col-md-4">
-															<h:inputText
+															<h:inputText id="supplierName"
 																styleClass="form-control input-default modal-input"
 																required="true"
 																value="#{ordersController.order.supplierName}"
@@ -110,7 +110,7 @@
 															</h:inputText>
 														</div>
 														<div class="col-md-4">
-															<h:inputText
+															<h:inputText id="driverName"
 																styleClass="form-control input-default modal-input"
 																required="true"
 																value="#{ordersController.order.driverName}"
@@ -122,7 +122,7 @@
 
 													<div class="row">
 														<div class="col-md-4">
-															<h:inputText
+															<h:inputText id="startingPoint"
 																styleClass="form-control input-default modal-input"
 																required="true"
 																value="#{ordersController.order.destinationFrom}"
@@ -131,7 +131,7 @@
 															</h:inputText>
 														</div>
 														<div class="col-md-4">
-															<h:inputText
+															<h:inputText id="destination"
 																styleClass="form-control input-default modal-input"
 																required="true"
 																value="#{ordersController.order.destinationTo}"
@@ -140,7 +140,7 @@
 															</h:inputText>
 														</div>
 														<div class="col-md-4">
-															<h:inputText
+															<h:inputText id="price"
 																styleClass="form-control input-default modal-input"
 																required="true" value="#{ordersController.order.price}"
 																a:placeholder="Price">
@@ -151,7 +151,7 @@
 
 													<div class="row">
 														<div class="col-md-4">
-															<h:inputText
+															<h:inputText id="dateFrom"
 																styleClass="form-control input-default modal-input datepicker"
 																required="true"
 																value="#{ordersController.order.dateFrom}"
@@ -161,7 +161,7 @@
 															</h:inputText>
 														</div>
 														<div class="col-md-4">
-															<h:inputText
+															<h:inputText id="dateTo"
 																styleClass="form-control input-default modal-input datepicker"
 																required="true" value="#{ordersController.order.dateTo}"
 																a:placeholder="Delivered Date">
@@ -175,8 +175,8 @@
 														<div class="col-md-4">
 															<h:outputText styleClass="modal-input"
 																value="Delivered: " />
-															<h:selectBooleanCheckbox styleClass="modal-input"
-																required="true"
+															<h:selectBooleanCheckbox id="delivered"
+																styleClass="modal-input" required="true"
 																value="#{ordersController.order.delivered}">
 																<f:ajax></f:ajax>
 															</h:selectBooleanCheckbox>
@@ -190,7 +190,8 @@
 													<h:commandLink
 														actionListener="#{ordersController.addOrder()}"
 														class="btn btn-primary btn-success" value="Save">
-														<p:ajax update="#{p.component('ordersList')} stat-tabs msgs"/>
+														<p:ajax oncomplete="reinit()"
+															update="ordersList stat-tabs msgs driverName orderCode supplierName startingPoint destination price dateFrom dateTo delivered" />
 													</h:commandLink>
 												</div>
 											</div>
@@ -204,7 +205,8 @@
 									value="#{ordersController.orders}" allowUnsorting="true"
 									sortMode="multiple" draggableColumns="true"
 									resizableColumns="true" editable="true" rows="10"
-									paginator="true" paginatorPosition="bottom" widgetVar="widget"
+									paginator="true" paginatorPosition="bottom"
+									widgetVar="widgetVar"
 									rowsPerPageTemplate="10,50,100,{ShowAll|'All'}">
 
 									<p:ajax event="rowEdit"
@@ -285,7 +287,8 @@
 										</p:cellEditor>
 									</p:column>
 
-									<p:column headerText="Date From" width="2em" sortBy="#{order.dateFrom}">
+									<p:column headerText="Date From" width="2em"
+										sortBy="#{order.dateFrom}">
 										<p:cellEditor>
 											<f:facet name="output">
 												<h:outputText value="#{order.dateFrom}">
@@ -302,7 +305,8 @@
 										</p:cellEditor>
 									</p:column>
 
-									<p:column headerText="Date To" width="2em" sortBy="#{order.dateTo}">
+									<p:column headerText="Date To" width="2em"
+										sortBy="#{order.dateTo}">
 										<p:cellEditor>
 											<f:facet name="output">
 												<h:outputText value="#{order.dateTo}">
@@ -331,7 +335,8 @@
 										</p:cellEditor>
 									</p:column>
 
-									<p:column headerText="Status" width="1em" sortBy="#{order.delivered}">
+									<p:column headerText="Status" width="1em"
+										sortBy="#{order.delivered}">
 										<p:cellEditor>
 											<f:facet name="output">
 												<h:panelGroup rendered="#{order.delivered == false}">
@@ -353,11 +358,11 @@
 									</p:column>
 
 									<p:column width="1em">
-										<h:commandLink action="deleteOrder"
-											actionListener="#{ordersController.deleteOrder()}"
-											styleClass="fa fa-trash remove">
-											<f:param name="toDelete" value="#{order.id}" />
-											<f:ajax render="msgs ordersList" />
+										<h:commandLink
+											actionListener="#{ordersController.deleteOrder(order)}">
+											<i class="fa fa-trash remove"></i>
+											<p:ajax update="msgs stat-tabs"
+												oncomplete="PF('widgetVar').filter()" />
 										</h:commandLink>
 									</p:column>
 								</p:dataTable>
