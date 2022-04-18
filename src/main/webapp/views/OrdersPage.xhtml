@@ -152,7 +152,7 @@
 													<div class="row">
 														<div class="col-md-4">
 															<h:inputText id="dateFrom"
-																styleClass="form-control input-default modal-input datepicker"
+																styleClass="form-control input-default modal-input my-datepicker"
 																required="true"
 																value="#{ordersController.order.dateFrom}"
 																a:placeholder="Lunching Date">
@@ -162,7 +162,7 @@
 														</div>
 														<div class="col-md-4">
 															<h:inputText id="dateTo"
-																styleClass="form-control input-default modal-input datepicker"
+																styleClass="form-control input-default modal-input my-datepicker"
 																required="true" value="#{ordersController.order.dateTo}"
 																a:placeholder="Delivered Date">
 																<f:convertDateTime pattern="dd-mm-yyyy" />
@@ -298,7 +298,7 @@
 											<f:facet name="input">
 												<p:inputText id="dateFrom" value="#{order.dateFrom}"
 													style="width:100%" onfocus="reinit()"
-													styleClass="datepicker date-from">
+													styleClass="my-datepicker date-from">
 													<f:convertDateTime pattern="dd-MM-yyyy" />
 												</p:inputText>
 											</f:facet>
@@ -316,7 +316,7 @@
 											<f:facet name="input">
 												<p:inputText id="dateTo" value="#{order.dateTo}"
 													onfocus="reinit()" style="width:100%"
-													styleClass="date-to datepicker">
+													styleClass="date-to my-datepicker">
 													<f:convertDateTime pattern="dd-MM-yyyy" />
 												</p:inputText>
 											</f:facet>
@@ -361,8 +361,7 @@
 										<h:commandLink
 											actionListener="#{ordersController.deleteOrder(order)}">
 											<i class="fa fa-trash remove"></i>
-											<p:ajax update="msgs stat-tabs"
-												oncomplete="PF('widgetVar').filter()" />
+											<p:ajax update="msgs stat-tabs ordersList" />
 										</h:commandLink>
 									</p:column>
 								</p:dataTable>

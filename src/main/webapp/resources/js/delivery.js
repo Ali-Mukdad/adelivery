@@ -4,13 +4,14 @@ $(function() {
 
 function initDatePicker() {
 
-	$('.datepicker').datepicker({
+	$('.my-datepicker').datepicker({
 		format: 'dd-mm-yyyy',
 		clearBtn: true,
+		todayHighlight: true,
 	});
 }
 
 function reinit(){
-	$('.datepicker').datepicker('destroy');
+	$('.my-datepicker').datepicker('destroy');
 	initDatePicker();
 }
