@@ -10,7 +10,6 @@
 	<ui:define name="main-content">
 		<p:growl id="msgs" showDetail="true" />
 		<div class="container-fluid mt-3">
-
 			<div class="row">
 				<h:panelGroup id="stat-tabs" style="width:100%;display:flex;">
 					<div class="col-lg-3 col-sm-6">
@@ -156,7 +155,7 @@
 																required="true"
 																value="#{ordersController.order.dateFrom}"
 																a:placeholder="Lunching Date">
-																<f:convertDateTime pattern="dd-mm-yyyy" />
+																<f:convertDateTime pattern="dd-MM-yyyy" />
 																<f:ajax></f:ajax>
 															</h:inputText>
 														</div>
@@ -165,7 +164,7 @@
 																styleClass="form-control input-default modal-input my-datepicker"
 																required="true" value="#{ordersController.order.dateTo}"
 																a:placeholder="Delivered Date">
-																<f:convertDateTime pattern="dd-mm-yyyy" />
+																<f:convertDateTime pattern="dd-MM-yyyy" />
 																<f:ajax></f:ajax>
 															</h:inputText>
 														</div>
@@ -209,7 +208,7 @@
 									widgetVar="widgetVar"
 									rowsPerPageTemplate="10,50,100,{ShowAll|'All'}">
 
-									<p:ajax event="rowEdit"
+									<p:ajax event="rowEdit" oncomplete="reinit()"
 										listener="#{ordersController.updateOrder(order)}"
 										update="msgs stat-tabs" />
 									<!-- <p:ajax event="rowEditCancel"
@@ -296,8 +295,8 @@
 												</h:outputText>
 											</f:facet>
 											<f:facet name="input">
-												<p:inputText id="dateFrom" value="#{order.dateFrom}"
-													style="width:100%" onfocus="reinit()"
+												<p:inputText id="dateFrom" value="#{order.dateFrom}" 
+													style="width:100%"
 													styleClass="my-datepicker date-from">
 													<f:convertDateTime pattern="dd-MM-yyyy" />
 												</p:inputText>
@@ -314,8 +313,7 @@
 												</h:outputText>
 											</f:facet>
 											<f:facet name="input">
-												<p:inputText id="dateTo" value="#{order.dateTo}"
-													onfocus="reinit()" style="width:100%"
+												<p:inputText id="dateTo" value="#{order.dateTo}" style="width:100%"
 													styleClass="date-to my-datepicker">
 													<f:convertDateTime pattern="dd-MM-yyyy" />
 												</p:inputText>

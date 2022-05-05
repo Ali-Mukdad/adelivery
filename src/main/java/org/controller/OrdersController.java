@@ -99,10 +99,10 @@ public class OrdersController implements Serializable {
 		nbOfOrdersDone = 0;
 		orders.stream().forEach(order -> {
 			Date today = new Date();
-			SimpleDateFormat d1 = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat d1 = new SimpleDateFormat("dd-mm-yyyy");
 			String stringDate = d1.format(today);
 			totalPrices += order.getPrice();
-			SimpleDateFormat d2 = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat d2 = new SimpleDateFormat("dd-mm-yyyy");
 			String orderDate = d2.format(order.getDateFrom());
 			if (orderDate.equals(stringDate)) {
 				nbOfOrdersToday += 1;
